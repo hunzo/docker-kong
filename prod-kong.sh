@@ -26,8 +26,6 @@ docker run -d --name kong \
      -e "KONG_ADMIN_LISTEN=0.0.0.0:8001, 0.0.0.0:8444 ssl" \
      -p 9080:8000 \
      -p 9443:8443 \
-     -p 9001:8001 \
-     -p 9444:8444 \
      kong:$VERSION
 
 docker run -d --name konga-database \
