@@ -3,6 +3,7 @@ export VERSION=latest
 docker network create kong-net
 docker run -d --name kong-database \
      --network=kong-net \
+     --restart=always \
      -p 5432:5432 \
      -e "POSTGRES_USER=kong" \
      -e "POSTGRES_DB=kong" \
@@ -17,6 +18,7 @@ docker run --rm \
 
 docker run -d --name kong \
      --network=kong-net \
+     --restart=always \
      -e "KONG_DATABASE=postgres" \
      -e "KONG_PG_HOST=kong-database" \
      -e "KONG_PROXY_ACCESS_LOG=/dev/stdout" \
@@ -32,6 +34,7 @@ docker run -d --name kong \
 
 docker run -d --name konga-database \
      --network=kong-net \
+     --restart=always \
      -e "POSTGRES_USER=kong" \
      -e "POSTGRES_DB=kong" \
      -e "POSTGRES_HOST_AUTH_METHOD=trust" \
@@ -40,6 +43,7 @@ sleep 5
 docker run --rm --network=kong-net pantsel/konga -c prepare -a postgres -u postgresql://kong@konga-database:5432/konga_db 
 docker run -d -p 1337:1337 \
      --network=kong-net \
+     --restart=always \
      -e "DB_ADAPTER=postgres" \
      -e "DB_HOST=konga-database" \
      -e "DB_USER=kong" \
