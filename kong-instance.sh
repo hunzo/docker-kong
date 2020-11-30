@@ -26,6 +26,7 @@ docker run -d --name kong \
      -e "KONG_PROXY_ERROR_LOG=/dev/stderr" \
      -e "KONG_ADMIN_ERROR_LOG=/dev/stderr" \
      -e "KONG_ADMIN_LISTEN=0.0.0.0:8001, 0.0.0.0:8444 ssl" \
+     -e "TZ=Asia/Bangkok" \
      -p 9080:8000 \
      -p 9443:8443 \
      -p 9001:8001 \
